@@ -31,7 +31,7 @@ public class SankePrintMatrix {
           {
               { 1, 2, 3, 4, 0, 100 },
               { 5, 6, 7, 8, 0, 100 },
-              { 9, 10, 11, 12, 0, 100 }
+              { 9, 10, 11, 12, 0, 100}
           };
           snakePrintMatrix(matrix1);
           System.out.println();
@@ -46,19 +46,17 @@ public class SankePrintMatrix {
 	public static void snakePrintMatrix(int[][] arr) {
 		int row = arr.length;
 		int col = arr[0].length;
-		int i=0, j=0;
+		int i=0;
         while(i<row){
-            if(j==0){
+            if(i%2==0){
               for(int c=0; c<col; c++){
                 System.out.print(arr[i][c]+"->");
               }
-              j = col;
             }
-            else if(j==col){
+            else{
                for(int c=col-1; c>=0; c--){
                 System.out.print(arr[i][c]+"->");
               }
-              j = 0;
             }
             i++;
         }
