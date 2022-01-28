@@ -46,7 +46,7 @@ Accepted
 Submissions
 2,393,933
 */
-
+// BFS
 class Solution {
     public int numIslands(char[][] grid) {
         int m = grid.length;
@@ -98,5 +98,50 @@ class Solution {
             neighbours.add(new Pair<>(i-1, j));
         }
         return neighbours;
+    }
+}
+
+// DFS
+class Solution {
+    public int numIslands(char[][] grid) {
+        if(grid == null || grid.length == 0 || grid[0].length == 0)
+            return 0;
+        int row = grid.length;
+        int col = grid[0].length;
+        boolean[][] visited = new boolean[row][col];
+        int numOfIslands = 0;
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                if(grid[i][j] == '1' && !visited[i][j]){
+                    dfs(grid, visited, i, j, row, col);
+                    numOfIslands++;
+                }
+            }
+        }
+        return numOfIslands;
+    }
+    public void dfs(char[][] grid, boolean[][] visited, int i, int j, int row, int col){
+        visited[i][j] = true;
+        for(Pair<Integer, Integer> neighbor: getValidNeighbors(grid, i, j, row, col)){
+            if(!visited[neighbor.getKey()][neighbor.getValue()]){
+                dfs(grid, visited, neighbor.getKey(), neighbor.getValue(), row, col);
+            }
+        }
+    }
+    public List<Pair<Integer, Integer>> getValidNeighbors(char[][] grid, int i, int j, int row, int col){
+        List<Pair<Integer, Integer>> neighbors = new LinkedList<>();
+        if((i-1)>=0 && (i-1)<row && grid[i-1][j]=='1'){
+            neighbors.add(new Pair<Integer, Integer>(i-1, j));
+        }
+        if((i+1)>=0 && (i+1)<row && grid[i+1][j]=='1'){
+            neighbors.add(new Pair<Integer, Integer>(i+1, j));
+        }
+        if((j-1)>=0 && (j-1)<col && grid[i][j-1]=='1'){
+            neighbors.add(new Pair<Integer, Integer>(i, j-1));
+        }
+        if((j+1)>=0 && (j+1)<col && grid[i][j+1]=='1'){
+            neighbors.add(new Pair<Integer, Integer>(i, j+1));
+        }
+        return neighbors;
     }
 }
