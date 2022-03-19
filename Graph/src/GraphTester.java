@@ -17,7 +17,7 @@ public class GraphTester {
 		System.out.println("==========Graph==========");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Run sample graph? 0 - No, 1- Yes");
-		boolean customGraph = sc.nextInt() == 0 ? true : false; 
+		boolean customGraph = sc.nextInt() == 0 ? true : false;
 		if(customGraph) {
 			System.out.println("Enter number of vertices and edges: ");
 			int v = sc.nextInt();
@@ -45,6 +45,7 @@ public class GraphTester {
 		System.out.println("Distance between 0 and 4 = "+distance);
 		System.out.println("Path exists between 0 and 4 ? "+graph.dfs(0, 4));
 		System.out.println("Path exists between 0 and 4 ? "+graph.dfsStack(0, 4));
+		System.out.println("Detect Cycle: "+graph.detectCycle());
 	}
 
 }

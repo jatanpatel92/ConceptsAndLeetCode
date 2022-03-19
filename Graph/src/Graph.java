@@ -57,7 +57,7 @@ public class Graph {
 		System.out.println();
 		return distance;
 	}
-	
+
 	public boolean dfs(int source, int destination) {
 		boolean[] visited = new boolean[adj.length];
 		visited[source] = true;
@@ -74,7 +74,7 @@ public class Graph {
 		}
 		return false;
 	}
-	
+
 	public boolean dfsStack(int source, int destination) {
 		Stack<Integer> stack = new Stack<>();
 		boolean[] visited = new boolean[adj.length];
@@ -88,6 +88,30 @@ public class Graph {
 					visited[neighbour] = true;
 					stack.push(neighbour);
 				}
+			}
+		}
+		return false;
+	}
+
+	public boolean detectCycle() {
+		int n = adj.length;
+		for(int i=0; i<n; i++) {
+			boolean[] visited = new boolean[n];
+			if(detectCycleDFS(i, visited, -1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	private boolean detectCycleDFS(int source, boolean[] visited, int parent) {
+		visited[source] = true;
+		for(int neighbor:adj[source]) {
+			if(!visited[neighbor]) {
+				if(detectCycleDFS(neighbor, visited, source))
+					return true;
+			}
+			else if(parent != neighbor) {
+				return true;
 			}
 		}
 		return false;
