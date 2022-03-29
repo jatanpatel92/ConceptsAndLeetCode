@@ -66,3 +66,55 @@ class Solution {
         return longestNonRepeatingSubString.length();
     }
 }
+/*
+With Frequency Map
+import java.util.*;
+
+class NoRepeatSubstring {
+  public static int findLength(String str) {
+    int left = 0;
+	int right = 0;
+	int maxLength = 0;
+	Map<Character, Integer> freqMap = new HashMap<>();
+	for(right = 0; right<str.length(); right++){
+		char key = str.charAt(right);
+		freqMap.put(key, freqMap.getOrDefault(key, 0)+1);
+		while(freqMap.get(key)>1){
+			char leftChar = str.charAt(left);
+			freqMap.put(leftChar, freqMap.get(leftChar)-1);
+			if(freqMap.get(leftChar)==0){
+				freqMap.remove(leftChar);
+			}
+			left++;
+		}
+		maxLength = Math.max(maxLength, right-left+1);
+	}
+	return maxLength;
+  }
+}
+
+*/
+/*
+With Index Map
+import java.util.*;
+
+class NoRepeatSubstring {
+  public static int findLength(String str) {
+    int left = 0;
+	int right = 0;
+	int maxLength = 0;
+	Map<Character, Integer> indexMap = new HashMap<>();
+	for(right = 0; right<str.length(); right++){
+		char key = str.charAt(right);
+		if(indexMap.containsKey(key)){
+			left = indexMap.get(key);
+			left++;
+		}
+		indexMap.put(key, right);
+		maxLength = Math.max(maxLength, right-left+1);
+	}
+	return maxLength;
+  }
+}
+
+*/
